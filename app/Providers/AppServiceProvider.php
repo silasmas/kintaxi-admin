@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Providers;
+
+use App\Http\Controllers\API\RideController;
+use App\Http\Resources\Currency as ResourcesCurrency;
+use App\Http\Resources\PaymentGateway as ResourcesPaymentGateway;
+use App\Http\Resources\Ride as ResourcesRide;
+use App\Http\Resources\Status as ResourcesStatus;
+use App\Http\Resources\User as ResourcesUser;
+use App\Http\Resources\UserRole as ResourcesUserRole;
+use App\Models\Currency;
+use App\Models\PaymentGateway;
+use App\Models\Ride;
+use App\Models\Status;
+use App\Models\User;
+use App\Models\UserRole;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ServiceProvider;
+
+/**
+ * @author Xanders
+ * @see https://team.xsamtech.com/xanderssamoth
+ */
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        Paginator::useBootstrap();
+
+        view()->composer('*', function ($view) {
+            // Users with role "Admin"
+            $admin_role = UserRole::where('role_name', 'Admin')->first();
+            $admins_collection = User::where('role_id', $admin_role->id)->get();
+            $admins = ResourcesUser::collection($admins_collection)->toArray(request());
+
+            if (Auth::check()) {
+                // Current user
+                $current_user = new ResourcesUser(Auth::user());
+                $user_data = $current_user->toArray(request());
+                // Roles list
+                $roles_collection = UserRole::all();
+                $roles = ResourcesUserRole::collection($roles_collection)->toArray(request());
+                // Statuses list
+                $statuses_collection = Status::all();
+                $statuses = ResourcesStatus::collection($statuses_collection)->toArray(request());
+                // Payment gateways list
+                $payment_gateways_collection = PaymentGateway::all();
+                $payment_gateways = ResourcesPaymentGateway::collection($payment_gateways_collection)->toArray(request());
+                // Currencies list
+                $currencies_collection = Currency::all();
+                $currencies = ResourcesCurrency::collection($currencies_collection)->toArray(request());
+                // Manage rides
+                $ride_controller = new RideController();
+                $rides_requested = $ride_controller->ridesByStatus('requested');
+                $rides_requested_data = $rides_requested->getData()->data;
+                $rides_in_progress = $ride_controller->ridesByStatus('in_progress');
+                $rides_in_progress_data = $rides_in_progress->getData()->data;
+                $rides_completed = $ride_controller->ridesByStatus('completed');
+                $rides_completed_data = $rides_completed->getData()->data;
+
+                $view->with('current_user', $user_data);
+                $view->with('rides_requested', $rides_requested_data);
+                $view->with('rides_in_progress', $rides_in_progress_data);
+                $view->with('rides_completed', $rides_completed_data);
+                $view->with('roles', $roles);
+                $view->with('statuses', $statuses);
+                $view->with('payment_gateways', $payment_gateways);
+                $view->with('currencies', $currencies);
+            }
+
+            $view->with('admins', $admins);
+            $view->with('current_locale', app()->getLocale());
+            $view->with('available_locales', config('app.available_locales'));
+        });
+    }
+}
