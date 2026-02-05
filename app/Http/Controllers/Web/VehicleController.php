@@ -299,7 +299,7 @@ class VehicleController extends Controller
 
         if ($request->status_id != null) {
             $vehicle->update([
-                'status_id' => $request->status_id,
+                'status_id' => $request->status_id == -5 ? 0 : $request->status_id,
                 'updated_by' => Auth::user()->id,
             ]);
         }
@@ -531,6 +531,14 @@ class VehicleController extends Controller
                     ]);
                 }
             }
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated'),
+                'vehicle_id' => $vehicle->id,
+            ]);
         }
 
         return redirect()->back()->with('success_message', __('miscellaneous.data_updated'));

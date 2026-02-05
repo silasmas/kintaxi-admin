@@ -36,9 +36,8 @@
 
         <!-- Custom style -->
         <style>
-            body, .table.select-table th, .table.select-table td, .card .card-subtitle, .home-tab .statistics-details .statistics-title, select.form-select { color: #555; }
+            body, .table.select-table th, .table.select-table td, .card .card-subtitle, .home-tab .statistics-details .statistics-title, select.form-select { color: #777; }
             .align-middle { vertical-align: 2px!important; }
-            /* .navbar .navbar-brand-wrapper .navbar-brand img { max-width: inherit!important; height: inherit!important; } */
         </style>
 
         <title>
@@ -76,34 +75,50 @@
                 </div>
 
                 <div class="navbar-menu-wrapper d-flex align-items-top">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto mt-sm-0 mt-3">
                         <li class="nav-item">
-                            <form class="search-form" action="#">
-                                <i class="icon-search"></i>
-                                <input type="search" class="form-control" placeholder="@lang('miscellaneous.search')" title="@lang('miscellaneous.search_input')">
-                            </form>
+                            <div class="input-group">
+                                <input type="search" class="form-control form-control-sm" placeholder="@lang('miscellaneous.search')" title="@lang('miscellaneous.search_input')" style="width: 210px;">
+                                <span class="input-group-text"><i class="icon-search"></i></span>
+                            </div>
                         </li>
 
                         <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link text-muted" id="languageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-translate"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown pb-0" aria-labelledby="languageDropdown">
+@foreach ($available_locales as $locale_name => $locale)
+    @if ($locale != $current_locale)
+                                <a class="dropdown-item py-3" href="{{ route('change_language', ['locale' => $locale]) }}">{{ $locale_name }}<i class="fi fi-{{ $locale == 'en' ? 'us' : $locale }} mt-1 float-end"></i></a>
+    @else
+                                <span class="dropdown-item py-3 disabled">{{ $locale_name }}<i class="fi fi-{{ $locale == 'en' ? 'us' : $locale }} mt-1 float-end"></i></span>
+    @endif
+@endforeach
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                            <a class="nav-link" id="userDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img class="img-xs rounded-circle" src="{{ $current_user['avatar_url'] }}" alt="Profile image">
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="userDropdown">
                                 <div class="dropdown-header text-center">
-                                    <img class="img-md rounded-circle" src="{{ $current_user['avatar_url'] }}" alt="Profile image" style="width: 50px;">
+                                    <img class="img-md mt-2 rounded-circle" src="{{ $current_user['avatar_url'] }}" alt="Profile image" style="width: 70px;">
 
                                     <p class="mb-1 mt-3 fw-semibold">{{ $current_user['firstname'] . ' ' . $current_user['lastname'] }}</p>
                                     <p class="fw-light text-muted mb-0">{{ $current_user['username'] ?? $current_user['email'] }}</p>
                                 </div>
 
                                 <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> @lang('miscellaneous.menu.account.title')</a>
-                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>@lang('miscellaneous.logout')</a>
                             </div>
                         </li>
                     </ul>
 
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center mt-sm-0 mt-3" type="button" data-bs-toggle="offcanvas">
                         <span class="mdi mdi-menu"></span>
                     </button>
                 </div>
@@ -117,6 +132,12 @@
                 <!-- partial -->
 
                 <div class="main-panel">
+                    {{-- <div class="position-absolute w-75" style="top: 30px; left: 270px; z-index: 9999;">
+                        <div class="input-group">
+                            <input type="search" class="form-control form-control-sm" placeholder="@lang('miscellaneous.search')" title="@lang('miscellaneous.search_input')" style="width: 20px;">
+                            <span class="input-group-text"><i class="icon-search"></i></span>
+                        </div>
+                    </div> --}}
                     <div class="content-wrapper">
 @yield('app-content')
                     </div>
