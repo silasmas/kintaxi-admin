@@ -452,6 +452,11 @@ return [
     // ===== ADMIN PAGES
     'admin' => [
         'overview' => 'Overview',
+        'member' => 'Member',
+        'members' => 'Members',
+        'vehicle' => 'Vehicle',
+        'vehicles' => 'Vehicles',
+        'count_data' => 'You have :count :data',
         'recent_vehicles' => 'Recent vehicles',
         'recent_users' => 'Recent users',
         'description' => 'Description',

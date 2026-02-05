@@ -18,14 +18,12 @@
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/feather/feather.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/mdi/css/materialdesignicons.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/ti-icons/css/themify-icons.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/typicons/typicons.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/simple-line-icons/css/simple-line-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/css/vendor.bundle.base.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/custom/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/addons/custom/jquery/jquery-ui/jquery-ui.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/addons/custom/jquery/datetimepicker/css/jquery.datetimepicker.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/custom/cropper/css/cropper.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/custom/sweetalert2/dist/sweetalert2.min.css') }}">
         <!-- endinject -->
@@ -38,7 +36,9 @@
 
         <!-- Custom style -->
         <style>
-            /* .boxed-layout .container-scroller { background: #777!important; } */
+            body, .table.select-table th, .table.select-table td, .card .card-subtitle, .home-tab .statistics-details .statistics-title, select.form-select { color: #555; }
+            .align-middle { vertical-align: 2px!important; }
+            /* .navbar .navbar-brand-wrapper .navbar-brand img { max-width: inherit!important; height: inherit!important; } */
         </style>
 
         <title>
@@ -76,125 +76,13 @@
                 </div>
 
                 <div class="navbar-menu-wrapper d-flex align-items-top">
-                    <ul class="navbar-nav">
-                        <li class="nav-item fw-semibold d-none d-lg-block ms-0">
-                            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-                            <h3 class="welcome-sub-text">Your performance summary this week </h3>
-                        </li>
-                    </ul>
-
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item d-none d-lg-block">
-                            <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-                                <span class="input-group-addon input-group-prepend border-right">
-                                    <span class="icon-calendar input-group-text calendar-icon"></span>
-                                </span>
-
-                                <input type="text" class="form-control">
-                            </div>
-                        </li>
-
                         <li class="nav-item">
                             <form class="search-form" action="#">
                                 <i class="icon-search"></i>
                                 <input type="search" class="form-control" placeholder="@lang('miscellaneous.search')" title="@lang('miscellaneous.search_input')">
                             </form>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                                <i class="icon-bell"></i>
-                                <span class="count"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="notificationDropdown">
-                                <a class="dropdown-item py-3 border-bottom">
-                                    <p class="mb-0 fw-medium float-start">You have 4 new notifications </p>
-                                    <span class="badge badge-pill badge-primary float-end">View all</span>
-                                </a>
-
-                                <a class="dropdown-item preview-item py-3">
-                                    <div class="preview-thumbnail">
-                                        <i class="mdi mdi-alert m-auto text-primary"></i>
-                                    </div>
-
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
-                                        <p class="fw-light small-text mb-0"> Just now </p>
-                                    </div>
-                                </a>
-
-                                <a class="dropdown-item preview-item py-3">
-                                    <div class="preview-thumbnail">
-                                        <i class="mdi mdi-lock-outline m-auto text-primary"></i>
-                                    </div>
-
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject fw-normal text-dark mb-1">Settings</h6>
-                                        <p class="fw-light small-text mb-0"> Private message </p>
-                                    </div>
-                                </a>
-
-                                <a class="dropdown-item preview-item py-3">
-                                    <div class="preview-thumbnail">
-                                        <i class="mdi mdi-airballoon m-auto text-primary"></i>
-                                    </div>
-
-                                    <div class="preview-item-content">
-                                        <h6 class="preview-subject fw-normal text-dark mb-1">New user registration</h6>
-                                        <p class="fw-light small-text mb-0"> 2 days ago </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-{{-- 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="icon-mail icon-lg"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
-                                <a class="dropdown-item py-3">
-                                    <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
-                                    <span class="badge badge-pill badge-primary float-end">View all</span>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../assets/images/faces/face10.jpg" alt="image" class="img-sm profile-pic">
-                                    </div>
-
-                                    <div class="preview-item-content flex-grow py-2">
-                                        <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
-                                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                                    </div>
-                                </a>
-
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../assets/images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
-                                    </div>
-
-                                    <div class="preview-item-content flex-grow py-2">
-                                        <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
-                                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                                    </div>
-                                </a>
-
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../assets/images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
-                                    </div>
-
-                                    <div class="preview-item-content flex-grow py-2">
-                                        <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
-                                        <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li> --}}
 
                         <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -222,6 +110,7 @@
             </nav>
             <!-- partial -->
 
+            <!-- main-panel ends -->
             <div class="container-fluid page-body-wrapper">
                 <!-- partial:../../partials/_sidebar.html -->
 @include('layouts.navigation')
@@ -232,16 +121,17 @@
 @yield('app-content')
                     </div>
                     <!-- content-wrapper ends -->
-                    <!-- partial:../../partials/_footer.html -->
+
+                    <!-- partial:partials/_footer.html -->
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
-                            <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2023. All rights reserved.</span>
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"><i class="fa-regular fa-copyright"></i> {{ date('Y') }} <strong>KinTaxi</strong> @lang('miscellaneous.all_right_reserved')</span>
+                            <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Designed by <a class="text-decoration-underline" href="https://silasmas.com" target="_blank">SDEV</a></span>
                         </div>
                     </footer>
                     <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
+
             </div>
             <!-- page-body-wrapper ends -->
         </div>
@@ -250,6 +140,7 @@
         <button id="btnBackTop" class="btn btn-lg btn-floating btn-warning position-fixed d-none rounded-circle shadow" title="@lang('miscellaneous.back_top')" style="z-index: 9999; bottom: 2rem; right: 2rem; padding: 0.4rem 0.5rem;" onclick="backToTop()" data-bs-toggle="tooltip"><i class="bi bi-chevron-double-up"></i></button> 
 
         <!-- JavaScript Libraries -->
+        <script src="{{ asset('assets/addons/custom/jquery/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/autosize/js/autosize.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/dataTables/datatables.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/cropper/js/cropper.min.js') }}"></script>
@@ -285,6 +176,29 @@
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             }
         </script>
+@if (Route::is('home'))
+        <script>
+            $(function () {
+                /*
+                 * Rides count
+                 */
+                // Periodic reminder (every second) with setInterval for each status
+                countRidesByStatus('#inProgressRides .rate-percentage', '#inProgressRides .statistics-title', 'in_progress', window.Laravel.lang.menu.customers.ride_in_progress, window.Laravel.lang.menu.customers.rides_in_progress);
+                countRidesByStatus('#completedRides .rate-percentage', '#completedRides .statistics-title', 'completed', window.Laravel.lang.menu.customers.ride_finished, window.Laravel.lang.menu.customers.rides_finished);
+                countRidesByStatus('#requestedRides .rate-percentage', '#requestedRides .statistics-title', 'requested', window.Laravel.lang.menu.customers.rented_vehicle, window.Laravel.lang.menu.customers.rented_vehicles);
+
+                setInterval(function() {
+                    countRidesByStatus('#inProgressRides .rate-percentage', '#inProgressRides .statistics-title', 'in_progress', window.Laravel.lang.menu.customers.ride_in_progress, window.Laravel.lang.menu.customers.rides_in_progress);
+                }, 10000);
+                setInterval(function() {
+                    countRidesByStatus('#completedRides .rate-percentage', '#completedRides .statistics-title', 'completed', window.Laravel.lang.menu.customers.ride_finished, window.Laravel.lang.menu.customers.rides_finished);
+                }, 10000);
+                setInterval(function() {
+                    countRidesByStatus('#requestedRides .rate-percentage', '#requestedRides .statistics-title', 'requested', window.Laravel.lang.menu.customers.rented_vehicle, window.Laravel.lang.menu.customers.rented_vehicles);
+                }, 10000);
+            });
+        </script>
+@endif
 @if (Route::is('customer.home'))
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCDLqp2YpT47nBISIE0S--ay2oJ6401IVk"></script>
         <script type="text/javascript">
@@ -436,14 +350,6 @@
         </script>
 @endif
         <script type="text/javascript">
-            /*
-             * When the user clicks on the button, scroll to the top of the document
-             */
-            const backToTop = () => {
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            };
-
             /**
              * Change user role
              */
@@ -834,24 +740,6 @@
             };
 
             $(function () {
-                /*
-                 * Rides count
-                 */
-                // Periodic reminder (every second) with setInterval for each status
-                countRidesByStatus('#inProgressRides h2', '#inProgressRides span', 'in_progress', window.Laravel.lang.menu.customers.ride_in_progress, window.Laravel.lang.menu.customers.rides_in_progress);
-                countRidesByStatus('#completedRides h2', '#completedRides span', 'completed', window.Laravel.lang.menu.customers.ride_finished, window.Laravel.lang.menu.customers.rides_finished);
-                countRidesByStatus('#requestedRides h2', '#requestedRides span', 'requested', window.Laravel.lang.menu.customers.rented_vehicle, window.Laravel.lang.menu.customers.rented_vehicles);
-
-                setInterval(function() {
-                    countRidesByStatus('#inProgressRides h2', '#inProgressRides span', 'in_progress', window.Laravel.lang.menu.customers.ride_in_progress, window.Laravel.lang.menu.customers.rides_in_progress);
-                }, 10000);
-                setInterval(function() {
-                    countRidesByStatus('#completedRides h2', '#completedRides span', 'completed', window.Laravel.lang.menu.customers.ride_finished, window.Laravel.lang.menu.customers.rides_finished);
-                }, 10000);
-                setInterval(function() {
-                    countRidesByStatus('#requestedRides h2', '#requestedRides span', 'requested', window.Laravel.lang.menu.customers.rented_vehicle, window.Laravel.lang.menu.customers.rented_vehicles);
-                }, 10000);
-
                 /*
                  * File type validation (Image only)
                  */
