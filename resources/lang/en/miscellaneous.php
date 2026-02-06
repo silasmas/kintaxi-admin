@@ -192,6 +192,7 @@ return [
     'recto' => 'Recto',
     'verso' => 'Verso',
     'day' => [
+        'title' => 'Day',
         'complete' => [
             'sunday' => 'Sunday',
             'monday' => 'Monday',
@@ -212,6 +213,7 @@ return [
         ],
     ],
     'month' => [
+        'title' => 'Month',
         'complete' => [
             'january' => 'January',
             'february' => 'February',
@@ -241,6 +243,8 @@ return [
             'december' => 'Dec',
         ],
     ],
+    'quarter' => 'Quarter',
+    'year' => 'Year',
 
     // ===== TIME COUNT
     'on_date' => 'on',

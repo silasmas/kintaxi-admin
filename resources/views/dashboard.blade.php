@@ -222,8 +222,8 @@
                                                                                     <div class="dropdown">
                                                                                         <button class="btn btn-light dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('miscellaneous.month.title')</button>
                                                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                                                                            <h6 class="dropdown-header">@lang('miscellaneous.quarter.title')</h6>
-                                                                                            <a class="dropdown-item" href="#">@lang('miscellaneous.year.title')</a>
+                                                                                            <a class="dropdown-item" href="#">@lang('miscellaneous.quarter')</a>
+                                                                                            <a class="dropdown-item" href="#">@lang('miscellaneous.year')</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
