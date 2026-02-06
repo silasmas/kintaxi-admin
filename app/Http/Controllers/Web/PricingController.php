@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @author Xanders
- * @see https://www.linkedin.com/in/xanders-samoth-b2770737/
+ * @see https://team.xsamtech.com/xanderssamoth
  */
 class PricingController extends Controller
 {
@@ -76,8 +76,15 @@ class PricingController extends Controller
             'zone_id' => $request->zone_id,
             'valid_from' => $formattedValidFrom,
             'valid_to' => $formattedValidTo,
-            'is_default' => $request->is_default,
+            'is_default' => !empty($request->is_default) ? ($request->is_default == -5 ? 0 : $request->is_default) : 0,
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
 
         return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
     }
@@ -232,12 +239,19 @@ class PricingController extends Controller
             $pricing->update([
                 'updated_at' => now(),
                 'updated_by' => Auth::user()->id,
-                'is_default' => $request->is_default == -5 ? 0 : $request->is_default,
+                'is_default' => ($request->is_default == -5 ? 0 : $request->is_default),
             ]);
 
             return response()->json([
                 'success' => true,
                 'message' => __('notifications.update_pricing_rule_success'),
+            ]);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
             ]);
         }
 
@@ -264,9 +278,13 @@ class PricingController extends Controller
 
         $pricing->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => __('miscellaneous.delete_success'),
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success'),
+            ]);
+        }
+
+        return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));
     }
 }
