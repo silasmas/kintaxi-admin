@@ -1,7 +1,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="overview-wrap">
+                                    <div class="d-sm-flex justify-content-between" >
                                         <div class="au-breadcrumb-content mb-sm-0 mb-3">
                                             <div class="au-breadcrumb-left text-sm-start text-center">
                                                 <h2 class="title-1">@lang('miscellaneous.menu.currency')</h2>
@@ -18,7 +18,7 @@
                                             </div>
                                         </div>
 
-                                        <button class="au-btn au-btn-icon au-btn--blue mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#currencyModal">
+                                        <button class="btn btn-warning mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#currencyModal">
                                             <i class="zmdi zmdi-plus"></i>@lang('miscellaneous.admin.currency.add')
                                         </button>
                                     </div>

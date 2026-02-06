@@ -1,7 +1,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="overview-wrap">
+                                    <div class="d-sm-flex justify-content-between" >
                                         <div class="au-breadcrumb-content mb-sm-0 mb-3">
                                             <div class="au-breadcrumb-left text-sm-start text-center">
                                                 <h2 class="title-1">@lang('miscellaneous.menu.pricing')</h2>
@@ -18,7 +18,7 @@
                                             </div>
                                         </div>
 
-                                        <button class="au-btn au-btn-icon au-btn--blue mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#pricingModal">
+                                        <button class="btn btn-warning py-2 mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#pricingModal">
                                             <i class="zmdi zmdi-plus"></i>@lang('miscellaneous.admin.pricing.add')
                                         </button>
                                     </div>
@@ -65,7 +65,7 @@
                                                     <td class="align-middle">{{ !empty($pricing['valid_to']) ? explicitDateTime($pricing['valid_to']) : '- - - - -' }}</td>
                                                     <td>
                                                         <div class="btn-group rounded-pill shadow-0">
-                                                            <button type="button" style="min-width: 120px;" class="btn btn-sm btn-{{ $pricing['is_default'] == 1 ? 'success' : 'danger' }} pb-1 rounded-pill text-start" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button type="button" style="min-width: 120px;" class="btn btn-sm btn-{{ $pricing['is_default'] == 1 ? 'success' : 'danger' }} rounded-pill text-start" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="bi bi-{{ $pricing['is_default'] == 1 ? 'check-lg' : 'x-lg' }} me-1"></i> {{ $pricing['is_default_STRING'] }}
                                                             </button>
                                                             <ul class="dropdown-menu">

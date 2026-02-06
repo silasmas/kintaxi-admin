@@ -1,7 +1,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="overview-wrap">
+                                    <div class="d-sm-flex justify-content-between" >
                                         <div class="au-breadcrumb-content mb-sm-0 mb-3">
                                             <div class="au-breadcrumb-left text-sm-start text-center">
                                                 <h2 class="title-1">@lang('miscellaneous.menu.payment-gateway')</h2>
@@ -18,7 +18,7 @@
                                             </div>
                                         </div>
 
-                                        <button class="au-btn au-btn-icon au-btn--blue mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#gatewayModal">
+                                        <button class="btn btn-warning mb-sm-0 mb-2" data-bs-toggle="modal" data-bs-target="#gatewayModal">
                                             <i class="zmdi zmdi-plus"></i>@lang('miscellaneous.admin.payment-gateway.add')
                                         </button>
                                     </div>
@@ -42,7 +42,7 @@
                                                     <td class="align-middle">{{ $gateway['gateway_name'] }}</td>
                                                     <td>
                                                         <div class="btn-group rounded-pill shadow-0">
-                                                            <button type="button" style="min-width: 120px;" class="btn btn-sm btn-{{ __('miscellaneous.admin.group.status.icon_color.' . $gateway['status']['id'] . '.color') }} pb-1 rounded-pill text-start" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <button type="button" style="min-width: 120px;" class="btn btn-sm btn-{{ __('miscellaneous.admin.group.status.icon_color.' . $gateway['status']['id'] . '.color') }} rounded-pill text-start" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 <i class="@lang('miscellaneous.admin.group.status.icon_color.' . $gateway['status']['id'] . '.icon') me-1"></i> @lang('miscellaneous.admin.group.status.icon_color.' . $gateway['status']['id'] . '.name')
                                                             </button>
                                                             <ul class="dropdown-menu">

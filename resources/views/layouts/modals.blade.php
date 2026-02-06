@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill">@lang('miscellaneous.register')</button>
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill">@lang('miscellaneous.register')</button>
                         </div>
                     </div>
                 </form>
@@ -549,7 +549,7 @@
                             </div>
                         </div>
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill position-relative">
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill position-relative">
                                 <span class="text-uppercase">@lang('miscellaneous.register')</span>
                                 <div class="spinner-border text-white position-absolute opacity-0" role="status" style="top: 0.2rem; right: 0.2rem;"><span class="visually-hidden">@lang('miscellaneous.loading')</span></div>
                             </button>
@@ -624,7 +624,7 @@
     @endif
                         </div>
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill">@lang('miscellaneous.register')</button>
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill">@lang('miscellaneous.register')</button>
                         </div>
                     </div>
                 </form>
@@ -731,7 +731,7 @@
                             </div>
                         </div>
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill">@lang('miscellaneous.register')</button>
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill">@lang('miscellaneous.register')</button>
                         </div>
                     </div>
                 </form>
@@ -776,7 +776,7 @@
                             </div>
                         </div>
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill">@lang('miscellaneous.register')</button>
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill">@lang('miscellaneous.register')</button>
                         </div>
                     </div>
                 </form>
@@ -878,7 +878,7 @@
                         </div>
 
                         <div class="modal-footer d-block border-0">
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill">@lang('miscellaneous.register')</button>
+                            <button type="submit" class="btn btn-success w-100 py-2 rounded-pill">@lang('miscellaneous.register')</button>
                         </div>
                     </div>
                 </form>

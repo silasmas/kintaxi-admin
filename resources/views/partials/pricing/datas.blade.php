@@ -24,7 +24,7 @@
                                             </div>
                                         </div>
 
-                                        <a href="{{ route('pricing.home') }}" class="au-btn au-btn-icon au-btn--blue mb-sm-0 mb-2">
+                                        <a href="{{ route('pricing.home') }}" class="btn btn-warning mb-sm-0 mb-2">
                                             <i class="zmdi zmdi-arrow-left me-2"></i>@lang('miscellaneous.back_list')
                                         </a>
                                     </div>

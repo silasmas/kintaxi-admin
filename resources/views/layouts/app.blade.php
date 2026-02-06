@@ -17,6 +17,7 @@
         <!-- plugins:css -->
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/feather/feather.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/mdi/css/materialdesignicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/fonts/bootstrap-icons/bootstrap-icons.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/ti-icons/css/themify-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/typicons/typicons.css') }}">
