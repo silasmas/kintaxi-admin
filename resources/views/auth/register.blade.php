@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div class="mt-3 d-grid gap-2">
-                                        <button type="submit" class="btn btn-block btn-success btn-lg fw-medium auth-form-btn">@lang('auth.register')</button>
+                                        <button type="submit" class="btn btn-success rounded-pill py-3 shadow-0">@lang('auth.register')</button>
                                     </div>
 
                                     <div class="text-center mt-4 fw-light">

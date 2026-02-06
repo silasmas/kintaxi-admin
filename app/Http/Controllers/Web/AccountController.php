@@ -85,7 +85,7 @@ class AccountController extends Controller
         if ($entity == 'account_settings') {
             if ($request->status_id != null) {
                 $user->update([
-                    'status_id' => $request->status_id,
+                    'status_id' => ($request->status_id == -5 ? 0 : $request->status_id),
                     'updated_at' => now(),
                 ]);
             }
@@ -117,6 +117,13 @@ class AccountController extends Controller
                     if (!empty($current_user->username)) {
                         if ($user->username != $request->username) {
                             if ($another_user->username == $request->username) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.username.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.username.exists'));
                             }
                         }
@@ -135,6 +142,13 @@ class AccountController extends Controller
                     if (!empty($current_user->email)) {
                         if ($user->email != $request->email) {
                             if ($another_user->email == $request->email) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.email.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.email.exists'));
                             }
                         }
@@ -212,6 +226,13 @@ class AccountController extends Controller
                     if (!empty($current_user->phone)) {
                         if ($user->phone != $request->phone) {
                             if ($another_user->phone == $request->phone) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.phone.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.phone.exists'));
                             }
                         }
@@ -354,10 +375,24 @@ class AccountController extends Controller
 
         if ($entity == 'password_update') {
             if (Hash::check($request->former_password, $user->password) == false) {
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => __('auth.password')
+                    ]);
+                }
+
                 return redirect()->back()->with('error_message', __('auth.password'));
             }
 
             if ($request->confirm_new_password != $request->new_password) {
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => __('notifications.confirm_new_password')
+                    ]);
+                }
+
                 return redirect()->back()->with('error_message', __('notifications.confirm_new_password'));
             }
 
@@ -391,6 +426,13 @@ class AccountController extends Controller
             $user->update([
                 'password' => Hash::make($request->new_password),
                 'updated_at' => now()
+            ]);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
             ]);
         }
 

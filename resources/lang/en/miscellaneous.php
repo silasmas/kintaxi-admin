@@ -35,6 +35,7 @@ return [
     'photos' => 'Photos',
     'video' => 'Video',
     'videos' => 'Videos',
+    'choose_language' => 'Choose your language',
     'your_language' => 'Your language',
     'your_activation_code' => 'Your activation code: ',
     'back_home' => 'Return to the home',

@@ -32,7 +32,8 @@
 
         <!-- Custom style -->
         <style>
-            /* .boxed-layout .container-scroller { background: #777!important; } */
+            .btn-warning { background: #ffde08!important; border-color: #ffde08!important; color: #000; }
+            .btn-warning:hover, .btn-warning:active, .btn-warning:visited { background: #fbc900!important; border-color: #fbc900!important; color: #000; }
         </style>
 
         <title>
@@ -145,7 +146,6 @@
         <script src="{{ asset('assets/addons/staradmin/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset('assets/addons/cooladmin/chartjs/Chart.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/autosize/js/autosize.min.js') }}"></script>
-        <script src="{{ asset('assets/addons/custom/dataTables/datatables.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/cropper/js/cropper.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/sweetalert2/dist/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('assets/js/off-canvas.js') }}"></script>

@@ -29,7 +29,6 @@
         <!-- endinject -->
         <!-- Plugin css for this page -->
         <link rel="stylesheet" href="{{ asset('assets/addons/staradmin/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/select.dataTables.min.css') }}">
         <!-- End plugin css for this page -->
         <!-- inject:css -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -38,6 +37,10 @@
         <style>
             body, .table.select-table th, .table.select-table td, .card .card-subtitle, .home-tab .statistics-details .statistics-title, select.form-select { color: #777; }
             .align-middle { vertical-align: 2px!important; }
+            .bg-warning { background: #ffeb08!important; }
+            .btn-warning { background: #ffde08!important; border-color: #ffde08!important; color: #000; }
+            .btn-warning:hover, .btn-warning:active, .btn-warning:visited { background: #fbc900!important; border-color: #fbc900!important; color: #000; }
+            .content-wrapper { padding-top: 0!important; }
         </style>
 
         <title>
@@ -88,7 +91,12 @@
                                 <i class="mdi mdi-translate"></i>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown pb-0" aria-labelledby="languageDropdown">
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown pb-0 overflow-hidden" aria-labelledby="languageDropdown">
+                                <div class="dropdown-header text-center bg-warning">
+                                    <p class="display-1"><i class="mdi mdi-translate"></i></p>
+                                    <p class="fw-semibold">@lang('miscellaneous.choose_language')</p>
+                                </div>
+
 @foreach ($available_locales as $locale_name => $locale)
     @if ($locale != $current_locale)
                                 <a class="dropdown-item py-3" href="{{ route('change_language', ['locale' => $locale]) }}">{{ $locale_name }}<i class="fi fi-{{ $locale == 'en' ? 'us' : $locale }} mt-1 float-end"></i></a>
@@ -104,7 +112,7 @@
                                 <img class="img-xs rounded-circle" src="{{ $current_user['avatar_url'] }}" alt="Profile image">
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown pb-0 overflow-hidden" aria-labelledby="userDropdown">
                                 <div class="dropdown-header text-center">
                                     <img class="img-md mt-2 rounded-circle" src="{{ $current_user['avatar_url'] }}" alt="Profile image" style="width: 70px;">
 
@@ -112,8 +120,15 @@
                                     <p class="fw-light text-muted mb-0">{{ $current_user['username'] ?? $current_user['email'] }}</p>
                                 </div>
 
-                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> @lang('miscellaneous.menu.account.title')</a>
-                                <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>@lang('miscellaneous.logout')</a>
+                                <a href="{{ route('account') }}" class="dropdown-item ps-2 py-2"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> @lang('miscellaneous.menu.account.title')</a>
+                                <span class="dropdown-item ps-2 py-2">
+                                    <form action="{{ route('logout') }}" method="POST">
+@csrf
+                                        <button class="btn btn-link p-0 text-dark text-decoration-none" type="submit">
+                                            <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>@lang('miscellaneous.logout')
+                                        </button>
+                                    </form>
+                                </span>
                             </div>
                         </li>
                     </ul>
@@ -132,12 +147,6 @@
                 <!-- partial -->
 
                 <div class="main-panel">
-                    {{-- <div class="position-absolute w-75" style="top: 30px; left: 270px; z-index: 9999;">
-                        <div class="input-group">
-                            <input type="search" class="form-control form-control-sm" placeholder="@lang('miscellaneous.search')" title="@lang('miscellaneous.search_input')" style="width: 20px;">
-                            <span class="input-group-text"><i class="icon-search"></i></span>
-                        </div>
-                    </div> --}}
                     <div class="content-wrapper">
 @yield('app-content')
                     </div>
@@ -163,7 +172,6 @@
         <!-- JavaScript Libraries -->
         <script src="{{ asset('assets/addons/custom/jquery/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/autosize/js/autosize.min.js') }}"></script>
-        <script src="{{ asset('assets/addons/custom/dataTables/datatables.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/cropper/js/cropper.min.js') }}"></script>
         <script src="{{ asset('assets/addons/custom/sweetalert2/dist/sweetalert2.min.js') }}"></script>
         <!-- plugins:js -->
@@ -183,7 +191,6 @@
         <!-- endinject -->
         <!-- Custom js for this page-->
         <script src="{{ asset('assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/js/dashboard.js') }}"></script>
         <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
 
         <!-- Custom Javascript -->
@@ -198,6 +205,7 @@
             }
         </script>
 @if (Route::is('home'))
+        <script src="{{ asset('assets/js/dashboard.js') }}"></script>
         <script>
             $(function () {
                 /*
@@ -279,33 +287,41 @@
                 });
 
                 initMap();
-
-                // $('#rideStatus').change(function (e) { 
-                //     e.preventDefault();
-
-                //     if ($('#rideStatus').val() === 'ride_in_progress') {
-                        
-                //     }
-                // });
-                // var latLng = new google.maps.LatLng(-1.6586834, 29.1669084);
-                // var map = new google.maps.Map(document.getElementById('gmap'), {
-                //     zoom: 12,
-                //     center: latLng,
-                //     mapTypeId: google.maps.MapTypeId.ROADMAP,
-                // });
-
-                // window.Laravel.data.rides_completed.forEach((item, index) => {
-                //     console.log(JSON.stringify(item.start_location));
-                //     var marker = new google.maps.Marker({
-                //         position: new google.maps.LatLng(item.start_location.location.lat, item.start_location.location.lng),
-                //         map: map,
-                //         draggable: false,
-                //         animation: google.maps.Animation.DROP,
-                //     });
-
-                //     marker.idEvent = item.id;
-                // });
             });
+        </script>
+@endif
+@if (Route::is('home') || Route::is('customer.home'))
+        <script type="text/javascript">
+            /*
+             * Injected data from Laravel
+             */
+            window.Laravel = {
+                lang: {
+                    menu: {
+                        customers: {
+                            title: "@lang('miscellaneous.menu.customers.title')",
+                            ride_in_progress: "@lang('miscellaneous.menu.customers.ride-in-progress')",
+                            rides_in_progress: "@lang('miscellaneous.menu.customers.rides-in-progress')",
+                            ride_finished: "@lang('miscellaneous.menu.customers.ride-finished')",
+                            rides_finished: "@lang('miscellaneous.menu.customers.rides-finished')",
+                            rented_vehicle: "@lang('miscellaneous.menu.customers.rented-vehicle')",
+                            rented_vehicles: "@lang('miscellaneous.menu.customers.rented-vehicles')",
+                        },
+                    },
+                    upload: {
+                        use_camera: "@lang('miscellaneous.upload.use_camera')",
+                        upload_file: "@lang('miscellaneous.upload.upload_file')",
+                        choose_existing_file: "@lang('miscellaneous.upload.choose_existing_file')",
+                        image_error: "@lang('miscellaneous.upload.image_error')",
+                        document_error: "@lang('miscellaneous.upload.document_error')",
+                    },
+                },
+                data: {
+                    rides_requested: @json($rides_requested),
+                    rides_in_progress: @json($rides_in_progress),
+                    rides_completed: @json($rides_completed),
+                }
+            }
         </script>
 @endif
 @if (Route::is('vehicle.show'))
@@ -775,7 +791,7 @@
 
                     if (validFiles.length === 0) {
                         $('#errorMessageWrapper').removeClass('d-none');
-                        $('#errorMessageWrapper .custom-message').html(window.Laravel.lang.upload.image_error);
+                        $('#errorMessageWrapper .custom-message').html(`{{ __("miscellaneous.upload.image_error") }}`);
 
                         // Clear the input field (remove the invalid file)
                         $(event.target).val('');
@@ -894,37 +910,6 @@
                     modal.show();
                 });
             });
-
-            /*
-             * Injected data from Laravel
-             */
-            window.Laravel = {
-                lang: {
-                    menu: {
-                        customers: {
-                            title: "@lang('miscellaneous.menu.customers.title')",
-                            ride_in_progress: "@lang('miscellaneous.menu.customers.ride-in-progress')",
-                            rides_in_progress: "@lang('miscellaneous.menu.customers.rides-in-progress')",
-                            ride_finished: "@lang('miscellaneous.menu.customers.ride-finished')",
-                            rides_finished: "@lang('miscellaneous.menu.customers.rides-finished')",
-                            rented_vehicle: "@lang('miscellaneous.menu.customers.rented-vehicle')",
-                            rented_vehicles: "@lang('miscellaneous.menu.customers.rented-vehicles')",
-                        },
-                    },
-                    upload: {
-                        use_camera: "@lang('miscellaneous.upload.use_camera')",
-                        upload_file: "@lang('miscellaneous.upload.upload_file')",
-                        choose_existing_file: "@lang('miscellaneous.upload.choose_existing_file')",
-                        image_error: "@lang('miscellaneous.upload.image_error')",
-                        document_error: "@lang('miscellaneous.upload.document_error')",
-                    },
-                },
-                data: {
-                    rides_requested: @json($rides_requested),
-                    rides_in_progress: @json($rides_in_progress),
-                    rides_completed: @json($rides_completed),
-                }
-            }
         </script>
     </body>
 </html>

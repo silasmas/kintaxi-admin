@@ -30,7 +30,7 @@
                                     </div>
 
                                     <div class="mt-3 d-grid gap-2">
-                                        <button type="submit" class="btn btn-block btn-warning btn-lg fw-medium auth-form-btn">@lang('auth.login')</button>
+                                        <button type="submit" class="btn btn-warning rounded-pill py-3 shadow-0">@lang('auth.login')</button>
                                     </div>
 
     @empty($admins)

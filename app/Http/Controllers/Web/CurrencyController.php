@@ -76,6 +76,13 @@ class CurrencyController extends Controller
             ]);
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
+
         return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
     }
 
@@ -128,6 +135,13 @@ class CurrencyController extends Controller
             ]);
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
+            ]);
+        }
+
         return redirect()->back()->with('success_message', __('miscellaneous.data_updated'));
     }
 
@@ -143,6 +157,13 @@ class CurrencyController extends Controller
         $currency = Currency::find($id);
 
         $currency->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success')
+            ]);
+        }
 
         return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));
     }

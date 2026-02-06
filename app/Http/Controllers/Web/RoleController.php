@@ -153,6 +153,13 @@ class RoleController extends BaseController
             'role_description' => $request->status_description,
         ]);
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
+
         return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
     }
 
@@ -173,6 +180,13 @@ class RoleController extends BaseController
                 'role_name' => $request->role_name,
                 'role_description' => $request->role_description,
             ]);
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('miscellaneous.data_created')
+                ]);
+            }
 
             return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
         }
@@ -202,6 +216,13 @@ class RoleController extends BaseController
 
             // If "email" and "phone" are NULL, return error
             if (trim($inputs['email']) == null and trim($inputs['phone']) == null) {
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => __('validation.custom.email_or_phone.required')
+                    ]);
+                }
+
                 return redirect()->back()->with('error_message', __('validation.custom.email_or_phone.required'));
             }
 
@@ -209,6 +230,13 @@ class RoleController extends BaseController
                 // Check if user phone already exists
                 foreach ($users as $another_user):
                     if ($another_user->phone == $inputs['email']) {
+                        if ($request->expectsJson()) {
+                            return response()->json([
+                                'success' => false,
+                                'message' => __('validation.custom.email.exists')
+                            ]);
+                        }
+
                         return redirect()->back()->with('error_message', __('validation.custom.email.exists'));
                     }
                 endforeach;
@@ -227,6 +255,13 @@ class RoleController extends BaseController
                 // Check if user phone already exists
                 foreach ($users as $another_user):
                     if ($another_user->phone == $inputs['phone']) {
+                        if ($request->expectsJson()) {
+                            return response()->json([
+                                'success' => false,
+                                'message' => __('validation.custom.phone.exists')
+                            ]);
+                        }
+
                         return redirect()->back()->with('error_message', __('validation.custom.phone.exists'));
                     }
                 endforeach;
@@ -245,7 +280,14 @@ class RoleController extends BaseController
                 // Check if username already exists
                 foreach ($users as $another_user):
                     if ($another_user->username == $inputs['username']) {
-                        return redirect()->back()->with('error_message', __('validation.custom.phone.exists'));
+                        if ($request->expectsJson()) {
+                            return response()->json([
+                                'success' => false,
+                                'message' => __('validation.custom.username.exists')
+                            ]);
+                        }
+
+                        return redirect()->back()->with('error_message', __('validation.custom.username.exists'));
                     }
                 endforeach;
             }
@@ -255,12 +297,26 @@ class RoleController extends BaseController
                 $parent = User::find($inputs['belongs_to']);
 
                 if (is_null($parent)) {
+                    if ($request->expectsJson()) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => __('notifications.find_user_404' . ': PARENT')
+                        ]);
+                    }
+
                     return redirect()->back()->with('error_message', __('notifications.find_user_404' . ': PARENT'));
                 }
             }
 
             if ($inputs['password'] != null) {
                 if ($request->confirm_password != $request->password or $request->confirm_password == null) {
+                    if ($request->expectsJson()) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => __('notifications.confirm_password_error')
+                        ]);
+                    }
+
                     return redirect()->back()->with('error_message', __('notifications.confirm_password_error'));
                 }
 
@@ -427,6 +483,13 @@ class RoleController extends BaseController
             $object->password_reset = new ResourcesPasswordReset($password_reset);
             $object->user = new ResourcesUser($user);
 
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('miscellaneous.data_created')
+                ]);
+            }
+
             return $this->handleResponse($object, __('notifications.create_user_success'));
         }
     }
@@ -445,6 +508,13 @@ class RoleController extends BaseController
             'role_name' => $request->role_name,
             'role_description' => $request->role_description,
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
+            ]);
+        }
 
         return redirect()->back()->with('success_message', __('miscellaneous.data_updated'));
     }
@@ -475,6 +545,13 @@ class RoleController extends BaseController
                 ]);
             }
 
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('miscellaneous.data_updated')
+                ]);
+            }
+
             return redirect()->back()->with('success_message', __('miscellaneous.data_updated'));
         }
 
@@ -488,7 +565,7 @@ class RoleController extends BaseController
                     'verified' => 1,
                     'verified_at' => now(),
                     'verified_by' => Auth::user()->id,
-                    'status_id' => $request->status_id
+                    'status_id' => ($request->status_id == -5 ? 0 : $request->status_id)
                 ]);
             }
 
@@ -497,6 +574,13 @@ class RoleController extends BaseController
                     'updated_at' => now(),
                     'updated_by' => Auth::user()->id,
                     'vehicle_id' => $request->vehicle_id,
+                ]);
+            }
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('miscellaneous.data_updated')
                 ]);
             }
 
@@ -509,7 +593,7 @@ class RoleController extends BaseController
 
             if ($request->status_id != null) {
                 $user->update([
-                    'status_id' => $request->status_id,
+                    'status_id' => ($request->status_id == -5 ? 0 : $request->status_id),
                     'updated_at' => now(),
                 ]);
             }
@@ -548,6 +632,13 @@ class RoleController extends BaseController
                     if (!empty($current_user->username)) {
                         if ($user->username != $request->username) {
                             if ($another_user->username == $request->username) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.username.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.username.exists'));
                             }
                         }
@@ -566,6 +657,13 @@ class RoleController extends BaseController
                     if (!empty($current_user->email)) {
                         if ($user->email != $request->email) {
                             if ($another_user->email == $request->email) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.email.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.email.exists'));
                             }
                         }
@@ -643,6 +741,13 @@ class RoleController extends BaseController
                     if (!empty($current_user->phone)) {
                         if ($user->phone != $request->phone) {
                             if ($another_user->phone == $request->phone) {
+                                if ($request->expectsJson()) {
+                                    return response()->json([
+                                        'success' => false,
+                                        'message' => __('validation.custom.phone.exists')
+                                    ]);
+                                }
+
                                 return redirect()->back()->with('error_message', __('validation.custom.phone.exists'));
                             }
                         }
@@ -769,6 +874,13 @@ class RoleController extends BaseController
 
             if ($request->password != null) {
                 if ($request->confirm_password != $request->password or $request->confirm_password == null) {
+                    if ($request->expectsJson()) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => __('notifications.confirm_password_error')
+                        ]);
+                    }
+
                     return redirect()->back()->with('error_message', __('notifications.confirm_password_error'));
                 }
 
@@ -893,6 +1005,13 @@ class RoleController extends BaseController
                 ]);
             }
 
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('miscellaneous.data_updated')
+                ]);
+            }
+
             return redirect()->back()->with('success_message', __('miscellaneous.data_updated'));
         }
     }
@@ -939,6 +1058,13 @@ class RoleController extends BaseController
             $document = Document::find($id);
 
             $document->delete();
+        }
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success')
+            ]);
         }
 
         return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));

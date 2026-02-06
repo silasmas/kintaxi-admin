@@ -66,6 +66,13 @@ class PaymentGatewayController extends Controller
             'gateway_name' => $request->gateway_name,
         ]);
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
+
         return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
     }
 
@@ -83,7 +90,7 @@ class PaymentGatewayController extends Controller
             $gateway->update([
                 'updated_at' => now(),
                 'updated_by' => Auth::user()->id,
-                'status_id' => $request->status_id,
+                'status_id' => ($request->status_id == -5 ? 0 : $request->status_id),
             ]);
         }
 
@@ -92,6 +99,13 @@ class PaymentGatewayController extends Controller
                 'updated_at' => now(),
                 'updated_by' => Auth::user()->id,
                 'gateway_name' => $request->gateway_name,
+            ]);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
             ]);
         }
 
@@ -110,6 +124,13 @@ class PaymentGatewayController extends Controller
         $gateway = PaymentGateway::find($id);
 
         $gateway->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success')
+            ]);
+        }
 
         return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));
     }

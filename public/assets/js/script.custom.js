@@ -36,12 +36,12 @@ $(document).ready(function () {
 
 
     /* jQuery DataTable */
-    $('#dataList, .dataList').DataTable({
-        language: { url: currentHost + '/assets/addons/custom/dataTables/Plugins/i18n/' + $('html').attr('lang') + '.json' },
-        paging: 'matchMedia' in window ? (window.matchMedia('(min-width: 500px)').matches ? true : false) : false,
-        ordering: false,
-        info: 'matchMedia' in window ? (window.matchMedia('(min-width: 500px)').matches ? true : false) : false
-    });
+    // $('#dataList, .dataList').DataTable({
+    //     language: { url: currentHost + '/assets/addons/custom/dataTables/Plugins/i18n/' + $('html').attr('lang') + '.json' },
+    //     paging: 'matchMedia' in window ? (window.matchMedia('(min-width: 500px)').matches ? true : false) : false,
+    //     ordering: false,
+    //     info: 'matchMedia' in window ? (window.matchMedia('(min-width: 500px)').matches ? true : false) : false
+    // });
 
     /* jQuery scroll4ever */
     // $('#scope').scroll4ever({

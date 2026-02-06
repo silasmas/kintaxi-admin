@@ -208,6 +208,13 @@ class VehicleController extends Controller
             'has_driving_assist_system' => $request->has_driving_assist_system,
         ]);
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
+
         return redirect()->to('/vehicle/' . $vehicle->id)->with('success_message', __('miscellaneous.data_created'));
     }
 
@@ -284,6 +291,13 @@ class VehicleController extends Controller
             }
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_created')
+            ]);
+        }
+
         return redirect()->back()->with('success_message', __('miscellaneous.data_created'));
     }
 
@@ -299,7 +313,7 @@ class VehicleController extends Controller
 
         if ($request->status_id != null) {
             $vehicle->update([
-                'status_id' => $request->status_id == -5 ? 0 : $request->status_id,
+                'status_id' => ($request->status_id == -5 ? 0 : $request->status_id),
                 'updated_by' => Auth::user()->id,
             ]);
         }
@@ -536,8 +550,7 @@ class VehicleController extends Controller
         if ($request->expectsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => __('miscellaneous.data_updated'),
-                'vehicle_id' => $vehicle->id,
+                'message' => __('miscellaneous.data_updated')
             ]);
         }
 
@@ -603,7 +616,7 @@ class VehicleController extends Controller
                 $category->update([
                     'updated_at' => now(),
                     'updated_by' => Auth::user()->id,
-                    'status_id' => $request->status_id,
+                    'status_id' => ($request->status_id == -5 ? 0 : $request->status_id),
                 ]);
             }
 
@@ -647,6 +660,13 @@ class VehicleController extends Controller
             }
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.data_updated')
+            ]);
+        }
+
         return redirect()->to('/vehicle/' . $entity)->with('success_message', __('miscellaneous.data_updated'));
     }
 
@@ -668,6 +688,13 @@ class VehicleController extends Controller
 
         if (Storage::exists($directory)) {
             Storage::deleteDirectory($directory);
+        }
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success')
+            ]);
         }
 
         return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));
@@ -713,6 +740,13 @@ class VehicleController extends Controller
             if (FacadesFile::exists($filePath)) {
                 FacadesFile::delete($filePath);
             }
+        }
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('miscellaneous.delete_success')
+            ]);
         }
 
         return redirect()->back()->with('success_message', __('miscellaneous.delete_success'));

@@ -8,7 +8,7 @@
                                     <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">@lang('miscellaneous.admin.overview')</a>
+                                                <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">@lang('miscellaneous.menu.dashboard')</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -220,10 +220,10 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <div class="dropdown">
-                                                                                        <button class="btn btn-light dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Month Wise </button>
+                                                                                        <button class="btn btn-light dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('miscellaneous.month.title')</button>
                                                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                                                                            <h6 class="dropdown-header">week Wise</h6>
-                                                                                            <a class="dropdown-item" href="#">Year Wise</a>
+                                                                                            <h6 class="dropdown-header">@lang('miscellaneous.quarter.title')</h6>
+                                                                                            <a class="dropdown-item" href="#">@lang('miscellaneous.year.title')</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
