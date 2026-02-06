@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @author Xanders
- * @see https://team.xsamtech.com/xanderssamoth
+ * @see https://www.linkedin.com/in/xanders-samoth-b2770737/
  */
 class Vehicle extends JsonResource
 {
