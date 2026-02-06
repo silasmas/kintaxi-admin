@@ -1,7 +1,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="d-sm-flex justify-content-between" >
+                                    <div class="d-sm-flex justify-content-between align-items-center" >
                                         <div class="au-breadcrumb-content mb-sm-0 mb-3">
                                             <div class="au-breadcrumb-left text-sm-start text-center">
                                                 <h2 class="title-1">@lang('miscellaneous.menu.pricing')</h2>

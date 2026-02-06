@@ -160,7 +160,7 @@
                                                                                         <a href="{{ route('role.entity.show', ['entity' => 'users', 'id' => $user['id']]) }}">
                                                                                             @lang('miscellaneous.change') <i class="fa fa-angle-double-right"></i>
                                                                                         </a><br>
-                                                                                        <a role="button" class="text-danger">
+                                                                                        <a role="button" class="text-danger" onclick="event.preventDefault(); deleteEntity('role', {{ $user['id'] }}, 'users')">
                                                                                             @lang('miscellaneous.delete')
                                                                                         </a>
                                                                                     </td>
